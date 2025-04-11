@@ -1,11 +1,15 @@
 {
-  "name": "tidb-server",
+  "name": "tidb-mcp-server",
   "version": "0.1.0",
-  "description": "A Model Context Protocol server",
-  "private": true,
+  "description": "A Model Context Protocol server for TiDB",
   "type": "module",
+  "main": "build/index.js",
   "bin": {
     "tidb-server": "./build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/l1806858547/tidb-server.git"
   },
   "files": [
     "build"
