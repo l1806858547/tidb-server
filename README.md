@@ -1,80 +1,48 @@
 # TiDB MCP Server
 
-A Model Context Protocol (MCP) server for TiDB that allows executing SELECT queries through MCP tools.
+A Model Context Protocol server for TiDB that provides SQL query capabilities.
 
 ## Features
-- Execute SELECT queries on TiDB
-- Secure connection via environment variables
-- Lightweight and easy to use
-
-## Prerequisites
-- Node.js 16+
-- TiDB instance
+- Execute SQL queries against TiDB
+- Read-only operations for safety
+- Easy integration with MCP ecosystem
 
 ## Installation
-
-### Via npx
 ```bash
-npx @your-username/tidb-server
-```
-
-### Global installation
-```bash
-npm install -g @your-username/tidb-server
-tidb-server
+npm install -g tidb-mcp-server
 ```
 
 ## Configuration
+Create a `config.json` file with your TiDB connection details:
 
-Set these environment variables before running:
-
-```bash
-export TIDB_HOST="your_tidb_host"
-export TIDB_PORT="4000" 
-export TIDB_USER="your_username"
-export TIDB_PASS="your_password"
-export TIDB_DB="your_database"
+```json
+{
+  "host": "your-tidb-host",
+  "port": 4000,
+  "user": "your-username",
+  "password": "your-password",
+  "database": "your-database"
+}
 ```
 
 ## Usage
-
 1. Start the server:
 ```bash
 tidb-server
 ```
 
-2. Use the MCP tool:
-```javascript
-const result = await use_mcp_tool({
-  server_name: 'tidb-server',
-  tool_name: 'tidb_query', 
-  arguments: {
-    sql: 'SELECT * FROM your_table LIMIT 10'
-  }
-});
+2. Use with MCP tools:
+```bash
+mcp query --server tidb --sql "SELECT * FROM users LIMIT 10"
 ```
 
-## Development
+## Example Queries
+```sql
+-- Get table schema
+SELECT * FROM information_schema.tables WHERE table_schema = 'your-database';
 
-1. Clone the repo:
-```bash
-git clone https://github.com/your-username/tidb-server.git
-cd tidb-server
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Build:
-```bash
-npm run build
-```
-
-4. Run:
-```bash
-node build/index.js
+-- Simple query
+SELECT id, name FROM users WHERE status = 'active';
 ```
 
 ## License
