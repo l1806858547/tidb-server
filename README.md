@@ -43,7 +43,26 @@ export TIDB_DB="your_database"
 tidb-server
 ```
 
-2. Use the MCP tool:
+2. Add to MCP configuration (cline_mcp_settings.json):
+```json
+{
+  "mcpServers": {
+    "tidb-server": {
+      "command": "npx",
+      "args": ["@l1806858547/tidb-server"],
+      "env": {
+        "TIDB_HOST": "your_tidb_host",
+        "TIDB_PORT": "your_tidb_port",
+        "TIDB_USER": "your_username",
+        "TIDB_PASS": "your_password",
+        "TIDB_DB": "your_database"
+      }
+    }
+  }
+}
+```
+
+3. Use the MCP tool:
 ```javascript
 const result = await use_mcp_tool({
   server_name: 'tidb-server',
