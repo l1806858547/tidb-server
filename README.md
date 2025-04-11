@@ -15,13 +15,13 @@ A Model Context Protocol (MCP) server for TiDB that allows executing SELECT quer
 
 ### Via npx
 ```bash
-npx @l1806858547/tidb-server
+npx tidb-mcp-server
 ```
 
 ### Global installation
 ```bash
-npm install -g @l1806858547/tidb-server
-tidb-server
+npm install -g tidb-mcp-server
+tidb-mcp-server
 ```
 
 ## Configuration
@@ -57,7 +57,7 @@ tidb-server
   "mcpServers": {
     "tidb-server": {
       "command": "npx",
-      "args": ["@l1806858547/tidb-server"],
+      "args": ["-y", "tidb-mcp-server"], # Also adding the -y flag for consistency
       "env": {
         "TIDB_HOST": "your_tidb_host",
         "TIDB_PORT": "your_tidb_port",
