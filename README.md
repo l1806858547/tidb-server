@@ -34,6 +34,14 @@ export TIDB_PORT="your_tidb_port"
 export TIDB_USER="your_username"
 export TIDB_PASS="your_password"
 export TIDB_DB="your_database"
+
+# Optional operation permissions (default: false)
+export ALLOW_INSERT_OPERATION="false"  # Set to "true" to allow INSERT operations
+export ALLOW_UPDATE_OPERATION="false"  # Set to "true" to allow UPDATE operations 
+export ALLOW_DELETE_OPERATION="false"  # Set to "true" to allow DELETE operations
+
+WARNING: Enabling these operations may expose your database to modification risks.
+Only enable what you need and ensure proper access controls are in place.
 ```
 
 ## Usage

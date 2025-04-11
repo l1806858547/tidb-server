@@ -36,6 +36,11 @@ class TiDBServer {
       throw new Error('Missing required TiDB connection environment variables');
     }
 
+    // 设置操作权限默认值
+    process.env.ALLOW_INSERT_OPERATION = process.env.ALLOW_INSERT_OPERATION || 'false';
+    process.env.ALLOW_UPDATE_OPERATION = process.env.ALLOW_UPDATE_OPERATION || 'false';
+    process.env.ALLOW_DELETE_OPERATION = process.env.ALLOW_DELETE_OPERATION || 'false';
+
     const config = {
       host: process.env.TIDB_HOST,
       port: parseInt(process.env.TIDB_PORT),
@@ -92,9 +97,18 @@ class TiDBServer {
       }
 
       try {
-        const sql = request.params.arguments.sql.trim();
-        if (!sql.toLowerCase().startsWith('select')) {
-          throw new McpError(ErrorCode.InvalidRequest, 'Only SELECT queries are allowed');
+        const sql = request.params.arguments.sql.trim().toLowerCase();
+        const sqlType = sql.split(' ')[0];
+        
+        // 检查操作权限
+        if (sqlType === 'insert' && process.env.ALLOW_INSERT_OPERATION !== 'true') {
+          throw new McpError(ErrorCode.InvalidRequest, 'INSERT operations are not allowed');
+        }
+        if (sqlType === 'update' && process.env.ALLOW_UPDATE_OPERATION !== 'true') {
+          throw new McpError(ErrorCode.InvalidRequest, 'UPDATE operations are not allowed');
+        }
+        if (sqlType === 'delete' && process.env.ALLOW_DELETE_OPERATION !== 'true') {
+          throw new McpError(ErrorCode.InvalidRequest, 'DELETE operations are not allowed');
         }
         
         const [rows] = await this.pool.query(sql);
