@@ -1,0 +1,54 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => ({ command: 'node', args: ['build/index.js'], env: { TIDB_HOST: config.tidbHost, TIDB_PORT: config.tidbPort.toString(), TIDB_USER: config.tidbUser, TIDB_PASS: config.tidbPass, TIDB_DB: config.tidbDb, ALLOW_INSERT_OPERATION: config.allowInsertOperation ? 'true' : 'false', ALLOW_UPDATE_OPERATION: config.allowUpdateOperation ? 'true' : 'false', ALLOW_DELETE_OPERATION: config.allowDeleteOperation ? 'true' : 'false' } })
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - tidbHost
+      - tidbPort
+      - tidbUser
+      - tidbPass
+      - tidbDb
+    properties:
+      tidbHost:
+        type: string
+        description: TiDB host
+      tidbPort:
+        type: string
+        description: TiDB port
+      tidbUser:
+        type: string
+        description: TiDB user
+      tidbPass:
+        type: string
+        description: TiDB password
+      tidbDb:
+        type: string
+        description: TiDB database name
+      allowInsertOperation:
+        type: boolean
+        default: false
+        description: Allow INSERT operations
+      allowUpdateOperation:
+        type: boolean
+        default: false
+        description: Allow UPDATE operations
+      allowDeleteOperation:
+        type: boolean
+        default: false
+        description: Allow DELETE operations
+  exampleConfig:
+    tidbHost: 127.0.0.1
+    tidbPort: "4000"
+    tidbUser: root
+    tidbPass: password123
+    tidbDb: testdb
+    allowInsertOperation: false
+    allowUpdateOperation: false
+    allowDeleteOperation: false

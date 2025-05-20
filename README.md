@@ -1,5 +1,7 @@
 # TiDB MCP Server
 
+[![smithery badge](https://smithery.ai/badge/@l1806858547/tidb-server)](https://smithery.ai/server/@l1806858547/tidb-server)
+
 A Model Context Protocol (MCP) server for TiDB that allows executing SELECT queries through MCP tools.
 
 ## Features
@@ -12,6 +14,14 @@ A Model Context Protocol (MCP) server for TiDB that allows executing SELECT quer
 - TiDB instance
 
 ## Installation
+
+### Installing via Smithery
+
+To install TiDB Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@l1806858547/tidb-server):
+
+```bash
+npx -y @smithery/cli install @l1806858547/tidb-server --client claude
+```
 
 ### Via npx
 ```bash
