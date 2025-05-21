@@ -4,6 +4,10 @@
 
 A Model Context Protocol (MCP) server for TiDB that allows executing SELECT queries through MCP tools.
 
+<a href="https://glama.ai/mcp/servers/@l1806858547/tidb-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@l1806858547/tidb-server/badge" alt="TiDB Server MCP server" />
+</a>
+
 ## Features
 - Execute SELECT queries on TiDB
 - Secure connection via environment variables
